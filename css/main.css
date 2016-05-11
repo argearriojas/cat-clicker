@@ -98,6 +98,15 @@ html, body, .fullheight {
     width: 600px;
     max-width: 100%;
     margin: 0 auto;
-    border-radius: 30px; }
+    border-radius: 30px;
+    z-index: 2; }
+  .container > #click-count {
+    font-size: 180px;
+    position: absolute;
+    color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; }
 
 /*# sourceMappingURL=main.css.map */

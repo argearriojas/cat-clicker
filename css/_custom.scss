@@ -1,0 +1,42 @@
+// _custom.scss
+
+html, body, .fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    background-color: #A2A2C6;
+
+    >img#cat {
+        display: block;
+        height: auto;
+        width: 600px;
+        max-width: 100%;
+        margin: 0 auto;
+        border-radius: 30px;
+        z-index: 2;
+    }
+
+    >#click-count {
+        font-size: 180px;
+        position: absolute;
+        color: #fff;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 1;
+    }
+}
+

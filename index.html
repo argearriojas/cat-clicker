@@ -24,11 +24,22 @@
 
     <div class="container fullheight">
         <img id="cat" src="img/cat.jpg" alt="Cat Picture" />
+        <span id="click-count"></span>
     </div>
 
     <script src="js/vendor/jquery-1.12.0.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+
+    <script type="text/javascript">
+        var click_count = 0;
+        $('#cat').click(function(e) {
+            click_count++;
+            $('#click-count').html(click_count);
+            $(this).hide();
+            $(this).fadeIn();
+        });
+    </script>
 
 </body>
 </html>
