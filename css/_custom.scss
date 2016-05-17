@@ -7,36 +7,46 @@ html, body, .fullheight {
 
 .container {
     width: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    align-items: center;
-
     background-color: #A2A2C6;
 
-    >img#cat {
-        display: block;
-        height: auto;
-        width: 600px;
-        max-width: 100%;
-        margin: 0 auto;
-        border-radius: 30px;
-        z-index: 2;
-    }
-
-    >#click-count {
-        font-size: 180px;
-        position: absolute;
-        color: #fff;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
+    .cat {
+        margin-top: 40px;
+        margin-left: 20px;
+        display: inline-block;
+        position: relative;
         z-index: 1;
+        width: 200px;
+        max-width: 100%;
+
+        >h1.name {
+            position: absolute;
+            top: -40px;
+            left: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #fff;
+            z-index: 4;
+        }
+
+        >img {
+            display: block;
+            position: relative;
+            height: auto;
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 30px;
+            z-index: 3;
+        }
+
+        >span.count {
+            font-size: 60px;
+            position: absolute;
+            color: #fff;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 2;
+        }
     }
 }
 

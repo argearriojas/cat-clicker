@@ -23,8 +23,6 @@
     <![endif]-->
 
     <div class="container fullheight">
-        <img id="cat" src="img/cat.jpg" alt="Cat Picture" />
-        <span id="click-count"></span>
     </div>
 
     <script src="js/vendor/jquery-1.12.0.min.js"></script>
@@ -32,12 +30,33 @@
     <script src="js/main.js"></script>
 
     <script type="text/javascript">
-        var click_count = 0;
-        $('#cat').click(function(e) {
-            click_count++;
-            $('#click-count').html(click_count);
-            $(this).hide();
-            $(this).fadeIn();
+        var cats = [
+            {"name":"Misu", "url":"img/cat.jpg", "clicks":0},
+            {"name":"Pelusa", "url":"img/cat2.jpg", "clicks":0}
+        ];
+
+        cats.forEach(catCreator);
+
+        function catCreator(cat, index) {
+            $(".container").append('\
+                <div class="cat">\
+                    <h1 class="name">' + cat["name"] + '</h1>\
+                    <img src="' + cat["url"] + '" alt="' + cat["name"] + ' the cat" />\
+                    <span class="count"></span>\
+                </div>\
+            ');
+        }
+
+        $('.cat').each(function(index){
+            $(this).click(function(e){
+                var click_count = ++cats[index]["clicks"];
+                $(this).children("span.count").first().html(click_count);
+                var img = $(this).children("img").first();
+                img[0].style.opacity = "0";
+                setTimeout(function(){
+                    img.animate({opacity: 1});
+                },200);
+            });
         });
     </script>
 
