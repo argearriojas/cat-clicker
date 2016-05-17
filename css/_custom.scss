@@ -8,44 +8,63 @@ html, body, .fullheight {
 .container {
     width: 100%;
     background-color: #A2A2C6;
+    color: #fff;
 
-    .cat {
-        margin-top: 40px;
-        margin-left: 20px;
-        display: inline-block;
+    .cat-list {
+        display: block;
+        float: left;
         position: relative;
-        z-index: 1;
-        width: 200px;
-        max-width: 100%;
+        width: 100px;
+        margin-left: 100px;
+        > .item {
+            cursor: pointer;
+        } 
+    }
 
-        >h1.name {
+    .cat-box {
+        display: block;
+        float: left;
+        position: relative;
+        width: 400px;
+        .cat {
             position: absolute;
-            top: -40px;
-            left: 20px;
-            font-size: 18px;
-            text-align: center;
-            color: #fff;
-            z-index: 4;
-        }
-
-        >img {
-            display: block;
+            margin-top: 40px;
+            margin-left: 20px;
+            display: inline-block;
             position: relative;
-            height: auto;
+            z-index: 1;
             width: 100%;
-            margin: 0 auto;
-            border-radius: 30px;
-            z-index: 3;
-        }
+            max-width: 100%;
 
-        >span.count {
-            font-size: 60px;
-            position: absolute;
-            color: #fff;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 2;
+            >h1.name {
+                position: absolute;
+                top: -40px;
+                left: 20px;
+                font-size: 18px;
+                text-align: center;
+                z-index: 4;
+            }
+
+            >img {
+                display: block;
+                position: relative;
+                height: auto;
+                width: 100%;
+                margin: 0 auto;
+                border-radius: 30px;
+                z-index: 3;
+                cursor: pointer;
+            }
+
+            >span.count {
+                font-size: 60px;
+                position: absolute;
+                color: #fff;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                z-index: 2;
+            }
         }
     }
 }
