@@ -23,65 +23,15 @@
     <![endif]-->
 
     <div class="container fullheight">
-        <div class="cat-list">
+        <div id="cat-list">
         </div>
-        <div class="cat-box">
+        <div id="cat-box">
         </div>
     </div>
 
     <script src="js/vendor/jquery-1.12.0.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
-
-    <script type="text/javascript">
-        var cats = [
-            {"name":"Misu", "url":"img/cat.jpg"},
-            {"name":"Pelusa", "url":"img/cat2.jpg"},
-            {"name":"Dormilón", "url":"img/cat3.jpg"},
-            {"name":"Bigotes", "url":"img/cat4.jpg"},
-            {"name":"Púrpura", "url":"img/cat5.jpg"},
-            {"name":"Travieso", "url":"img/cat6.jpg"}
-        ];
-
-        cats.forEach(catCreator);
-
-        function catCreator(cat, index) {
-            $(".cat-list").append('\
-                <p class="item" data-cat-id="cat-' + index + '">' + cat["name"] + '</p>\
-            ');
-            $(".cat-box").append('\
-                <div id="cat-' + index + '" class="cat" style="display:none;">\
-                    <h1 class="name">' + cat["name"] + '</h1>\
-                    <img src="' + cat["url"] + '" alt="' + cat["name"] + ' the cat" />\
-                    <span class="count"></span>\
-                </div>\
-            ');
-        }
-
-        var currentCat;
-
-        $('.cat-list > p').each(function(index){
-            var targetCat = $( '#' + $(this).data('catId'));
-            $(this).click(function(e){
-                if (currentCat instanceof jQuery) currentCat.hide();
-                targetCat.show();
-                currentCat = targetCat;
-            });
-        });
-
-        $('.cat').each(function(index){
-            var click_count = 0;
-            $(this).click(function(e){
-                click_count++;
-                $(this).children("span.count").first().html(click_count);
-                var img = $(this).children("img").first();
-                img[0].style.opacity = "0";
-                setTimeout(function(){
-                    img.animate({opacity: 1});
-                },200);
-            });
-        });
-    </script>
 
 </body>
 </html>

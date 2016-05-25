@@ -10,18 +10,25 @@ html, body, .fullheight {
     background-color: #A2A2C6;
     color: #fff;
 
-    .cat-list {
+    #cat-list {
         display: block;
         float: left;
         position: relative;
         width: 100px;
         margin-left: 100px;
-        > .item {
+        > a.item {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
             cursor: pointer;
+            &:focus {
+                color: #fff;
+            }
         } 
     }
 
-    .cat-box {
+    #cat-box {
         display: block;
         float: left;
         position: relative;
@@ -57,13 +64,15 @@ html, body, .fullheight {
             }
 
             >span.count {
-                font-size: 60px;
+                font-size: 40px;
                 position: absolute;
                 color: #fff;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%,-50%);
-                z-index: 2;
+                right: 0px;
+                bottom: 0px;
+                z-index: 4;
+                background-color: rgba(0,0,0,0.5);
+                padding: 0 30px;
+                border-radius: 30px;
             }
         }
     }
