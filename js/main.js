@@ -1,14 +1,19 @@
 $(function(){
     var model = {
         init: function() {
-            this.cats = [
-                {"name":"Misu", "url":"img/cat.jpg", "clicks":0},
-                {"name":"Pelusa", "url":"img/cat2.jpg", "clicks":0},
-                {"name":"Dormilón", "url":"img/cat3.jpg", "clicks":0},
-                {"name":"Bigotes", "url":"img/cat4.jpg", "clicks":0},
-                {"name":"Púrpura", "url":"img/cat5.jpg", "clicks":0},
-                {"name":"Travieso", "url":"img/cat6.jpg", "clicks":0}
-            ];
+            if (!localStorage.cuteCats) {
+                this.cats = [
+                    {"name":"Misu", "url":"img/cat.jpg", "clicks":0},
+                    {"name":"Pelusa", "url":"img/cat2.jpg", "clicks":0},
+                    {"name":"Dormilón", "url":"img/cat3.jpg", "clicks":0},
+                    {"name":"Bigotes", "url":"img/cat4.jpg", "clicks":0},
+                    {"name":"Púrpura", "url":"img/cat5.jpg", "clicks":0},
+                    {"name":"Travieso", "url":"img/cat6.jpg", "clicks":0}
+                ];
+                localStorage.cuteCats = JSON.stringify(this.cats);
+            } else {
+                this.cats = JSON.parse(localStorage.cuteCats);
+            }
 
             // This will determine which cat is going to be displayed
             this.currentCatId = null;
@@ -28,7 +33,9 @@ $(function(){
         },
         incrementCount: function() {
             var cat = this.getCurrentCat();
-            return cat["clicks"]++;
+            var count = cat["clicks"]++;
+            localStorage.cuteCats = JSON.stringify(this.cats);
+            return count;
         },
         updateCurrentCatId: function() {
             // Get the cat to display from url hash
@@ -53,6 +60,8 @@ $(function(){
             cat.name = data.name;
             cat.url = data.url;
             cat.clicks = data.clicks;
+
+            localStorage.cuteCats = JSON.stringify(this.cats);
         }
     };
 
