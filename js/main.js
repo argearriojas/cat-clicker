@@ -9,6 +9,8 @@ $(function(){
                 {"name":"Púrpura", "url":"img/cat5.jpg", "clicks":0},
                 {"name":"Travieso", "url":"img/cat6.jpg", "clicks":0}
             ];
+            this.currentCatId = null;
+            this.updateCurrentCatId();
         },
         getAllCats: function() {
             return this.cats;
@@ -16,9 +18,12 @@ $(function(){
         getCat: function(id) {
             return this.cats[id];
         },
-
-        incrementCatClicks: function(id) {
+        incrementCount: function(id) {
             return ++this.cats[id]["clicks"];
+        },
+        updateCurrentCatId: function() {
+            var id = window.location.hash.substring(1);
+            this.currentCatId = id && (id < this.cats.length) ? id : 0;
         }
     };
 
@@ -27,16 +32,18 @@ $(function(){
             return model.getAllCats();
         },
 
-        getCat: function(id) {
-            return model.getCat(id);
+        getCurrentCat: function() {
+            return model.getCat(model.currentCatId);
         },
 
-        clickHandler: function() {
-            var catId = window.location.hash.substring(1);
-            if (catId.length > 0) {
-                model.incrementCatClicks(catId);
-                view.renderCat();
-            }
+        incrementCount: function() {
+            model.incrementCount(model.currentCatId);
+            view.renderCat();
+        },
+
+        changeCat: function() {
+            model.updateCurrentCatId();
+            view.renderCat();
         },
 
         init: function() {
@@ -47,30 +54,28 @@ $(function(){
 
     var view = {
         init: function() {
+            this.catList = $('#cat-list');
+            this.catName = $('#cat-name');
+            this.catImage = $('#cat-img');
+            this.catCount = $('#cat-count');
             this.renderList();
             this.renderCat();
-            $(window).on('hashchange', this.renderCat);
-            $('#cat-box').on('click', octopus.clickHandler);
+            $(window).on('hashchange', octopus.changeCat);
+            this.catImage.on('click', octopus.incrementCount);
         },
         renderList: function() {
             var htmlStr = '';
             octopus.getCats().forEach(function(cat, index){
                 htmlStr += '<a class="item" href="#' + index + '">' + cat["name"] + '</a>';
             });
-            $('#cat-list').html(htmlStr);
+            this.catList.html(htmlStr);
         },
         renderCat: function(){
-            var htmlStr = '';
-            var catId = window.location.hash.substring(1);
-            if (catId.length > 0) {
-                var cat = octopus.getCat(catId);
-                htmlStr += '<div class="cat">\
-                    <h1 class="name">' + cat["name"] + '</h1>\
-                    <img src="' + cat["url"] + '" alt="' + cat["name"] + ' the cat" />\
-                    <span class="count"> ' + cat["clicks"] + ' </span>\
-                </div>'
-            }
-            $('#cat-box').html( htmlStr );
+            var cat = octopus.getCurrentCat();
+            this.catName.html(cat["name"]);
+            this.catImage.attr('src', cat["url"]);
+            this.catImage.attr('alt', cat["name"] + ' the cat');
+            this.catCount.html(cat["clicks"]);
         }
     };
 

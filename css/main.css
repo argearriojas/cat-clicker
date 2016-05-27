@@ -132,8 +132,8 @@ html, body, .fullheight {
         font-size: 40px;
         position: absolute;
         color: #fff;
-        right: 0px;
-        bottom: 0px;
+        left: 0px;
+        top: 0px;
         z-index: 4;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0 30px;
