@@ -99,6 +99,7 @@ $(function(){
                     clicks: view.counterInput.val()
                 });
             model.hideAdmin();
+            view.renderList();
             view.renderCat();
             view.renderForms();
         },
