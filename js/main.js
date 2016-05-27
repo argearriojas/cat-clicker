@@ -11,6 +11,7 @@ $(function(){
             ];
             this.currentCatId = null;
             this.updateCurrentCatId();
+            this.AdminVisibility = false;
         },
         getAllCats: function() {
             return this.cats;
@@ -24,6 +25,18 @@ $(function(){
         updateCurrentCatId: function() {
             var id = window.location.hash.substring(1);
             this.currentCatId = id && (id < this.cats.length) ? id : 0;
+        },
+        hideAdmin: function() {
+            this.AdminVisibility = false;
+        },
+        showAdmin: function() {
+            this.AdminVisibility = true;
+        },
+        updateCatInfo: function(data) {
+            var cat = this.cats[this.currentCatId];
+            cat.name = data.name;
+            cat.url = data.url;
+            cat.clicks = data.clicks;
         }
     };
 
@@ -39,11 +52,39 @@ $(function(){
         incrementCount: function() {
             model.incrementCount(model.currentCatId);
             view.renderCat();
+            view.renderForms();
         },
 
         changeCat: function() {
             model.updateCurrentCatId();
+            model.hideAdmin();
             view.renderCat();
+            view.renderForms();
+        },
+
+        showAdmin: function() {
+            model.showAdmin();
+            view.renderForms();
+        },
+
+        getAdminVisibility: function() {
+            return model.AdminVisibility;
+        },
+
+        resetAdminForm: function() {
+            model.hideAdmin();
+            view.renderForms();
+        },
+
+        saveCatInfo: function() {
+            model.updateCatInfo({
+                    name: view.nameInput.val(),
+                    url: view.urlInput.val(),
+                    clicks: view.counterInput.val()
+                });
+            model.hideAdmin();
+            view.renderCat();
+            view.renderForms();
         },
 
         init: function() {
@@ -55,13 +96,31 @@ $(function(){
     var view = {
         init: function() {
             this.catList = $('#cat-list');
+
             this.catName = $('#cat-name');
             this.catImage = $('#cat-img');
             this.catCount = $('#cat-count');
+
+            this.adminButton = $('#admin-button input');
+
+            this.catAdmin = $('#cat-admin');
+            this.nameInput = $('#cat-admin input[name="name"]');
+            this.urlInput = $('#cat-admin input[name="url"]');
+            this.counterInput = $('#cat-admin input[name="count"]');
+            this.saveButton = $('#cat-admin input[name="save"]');
+            this.cancelButton = $('#cat-admin input[name="cancel"]');
+
             this.renderList();
             this.renderCat();
+            this.renderForms();
             $(window).on('hashchange', octopus.changeCat);
             this.catImage.on('click', octopus.incrementCount);
+            this.adminButton.on('click', octopus.showAdmin);
+            this.cancelButton.on('click', octopus.resetAdminForm);
+            this.catAdmin.on('submit', function(e){
+                octopus.saveCatInfo();
+                e.preventDefault();
+            });
         },
         renderList: function() {
             var htmlStr = '';
@@ -76,6 +135,19 @@ $(function(){
             this.catImage.attr('src', cat["url"]);
             this.catImage.attr('alt', cat["name"] + ' the cat');
             this.catCount.html(cat["clicks"]);
+        },
+        renderForms: function(){
+            var cat = octopus.getCurrentCat();
+            this.nameInput.val(cat["name"]);
+            this.urlInput.val(cat["url"]);
+            this.counterInput.val(cat["clicks"]);
+            if (octopus.getAdminVisibility()) {
+                this.adminButton.css('display', 'none');
+                this.catAdmin.css('display', 'block');
+            } else {
+                this.adminButton.css('display', 'block');
+                this.catAdmin.css('display', 'none');
+            }
         }
     };
 

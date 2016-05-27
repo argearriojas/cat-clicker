@@ -138,5 +138,19 @@ html, body, .fullheight {
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0 30px;
         border-radius: 30px; }
+    .container #cat-box #admin-area {
+      width: 100%;
+      margin-left: 20px;
+      margin-top: 20px; }
+      .container #cat-box #admin-area form {
+        margin-right: 10px; }
+        .container #cat-box #admin-area form#admin-button {
+          float: left; }
+        .container #cat-box #admin-area form#cat-admin {
+          float: right; }
+        .container #cat-box #admin-area form input {
+          color: #000; }
+          .container #cat-box #admin-area form input[type="button"] {
+            margin-top: 20px; }
 
 /*# sourceMappingURL=main.css.map */
