@@ -47,7 +47,7 @@ $(function(){
         },
         updateCatInfo: function(data) {
             // Current Cat
-            var cat = getCurrentCat();
+            var cat = this.getCurrentCat();
 
             // Set new values for the current cat
             cat.name = data.name;
